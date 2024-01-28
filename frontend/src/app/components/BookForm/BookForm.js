@@ -1,16 +1,22 @@
 'use client'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addBook } from '@/app/redux/books/actionCreators'
 
 function BookForm() {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
+    const dispatch = useDispatch()
 
     const handleSubmit = e => {
         e.preventDefault()
-
         if (!title || !author) return
-
-        console.log(title, author)
+        const book = {
+            title,
+            author,
+            id: self.crypto.randomUUID(),
+        }
+        dispatch(addBook(book))
         setAuthor('')
         setTitle('')
     }
