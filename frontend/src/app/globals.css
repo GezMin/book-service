@@ -25,3 +25,7 @@ body {
         )
         rgb(var(--background-start-rgb));
 }
+
+.block {
+    @apply flex flex-col justify-center items-center rounded-md w-full  h-full text-black bg-stone-200;
+}
