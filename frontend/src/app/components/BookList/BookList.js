@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { deleteBook } from '@/app/redux/books/actionCreators'
+import { MdDeleteForever } from 'react-icons/md'
 
 function BookList() {
     const books = useSelector(state => state.books)
@@ -23,14 +24,24 @@ function BookList() {
                     {books.map((book, i) => (
                         <li
                             key={book.id}
-                            className={`border-b border-violet-400 px-8 text-left text-2xl cursor-pointer p-2 hover:bg-violet-200 ${
+                            className={`border-b border-violet-400 px-8 text-left text-2xl  p-2 hover:bg-violet-200 ${
                                 i % 2 === 0 ? 'bg-red-100' : 'bg-lime-100'
                             }`}
-                            onClick={() => deleteBookHandler(book.id)}
                         >
-                            <div>
-                                {++i}. {book.title} by{' '}
-                                <strong>{book.author}</strong>
+                            <div className='flex justify-between items-center'>
+                                <span>
+                                    {++i}. {book.title} by{' '}
+                                    <strong>{book.author}</strong>
+                                </span>
+                                <span>
+                                    <MdDeleteForever
+                                        size={36}
+                                        onClick={() =>
+                                            deleteBookHandler(book.id)
+                                        }
+                                        className='cursor-pointer hover:text-red-500'
+                                    />
+                                </span>
                             </div>
                         </li>
                     ))}
