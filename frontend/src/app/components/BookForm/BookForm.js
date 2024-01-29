@@ -16,6 +16,7 @@ function BookForm() {
         const randomBookWithId = {
             ...randomBook,
             id: self.crypto.randomUUID(),
+            isFavorite: false,
         }
         dispatch(addBook(randomBookWithId))
     }
@@ -27,6 +28,7 @@ function BookForm() {
             title,
             author,
             id: self.crypto.randomUUID(),
+            isFavorite: false,
         }
         dispatch(addBook(book))
         setAuthor('')
@@ -71,14 +73,14 @@ function BookForm() {
                 </div>
                 <button
                     type='submit'
-                    className='w-full p-2 px-5 my-5 text-2xl text-white border bg-violet-600 hover:bg-violet-700'
+                    className='w-full p-2 px-5 my-3 text-2xl text-white border bg-violet-600 hover:bg-violet-700'
                 >
                     Add book
                 </button>
                 <button
                     type='button'
                     onClick={handleAddRandomBook}
-                    className='w-full p-2 px-5 my-5 text-2xl text-white border bg-violet-600 hover:bg-violet-700'
+                    className='w-full p-2 px-5 mb-3 text-2xl text-white border bg-violet-600 hover:bg-violet-700'
                 >
                     Add random book
                 </button>

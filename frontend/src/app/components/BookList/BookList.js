@@ -1,22 +1,33 @@
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { deleteBook } from '@/app/redux/books/actionCreators'
-import { MdDeleteForever } from 'react-icons/md'
+import { deleteBook, toggleFavorite } from '@/app/redux/books/actionCreators'
+import { MdDeleteForever, MdFavorite, MdFavoriteBorder } from 'react-icons/md'
 
 function BookList() {
     const books = useSelector(state => state.books)
     const dispatch = useDispatch()
     const countBooksList = books.length
+    const countIsFavorite = books.filter(book => book.isFavorite).length
 
     const deleteBookHandler = id => {
         dispatch(deleteBook(id))
     }
 
+    const toggleFavoriteHandler = id => {
+        dispatch(toggleFavorite(id))
+    }
+
     return (
-        <div className='block'>
-            <h2 className='p-2 mt-4 text-3xl font-bold'>
-                BookList ({countBooksList})
-            </h2>
+        <div className='flex flex-col items-center justify-center w-full h-full text-black rounded-md bg-stone-200'>
+            <div className='relative flex flex-row justify-between w-full p-4 mt-4 text-2xl'>
+                <span className='w-full text-3xl bold'>
+                    BookList ({countBooksList})
+                </span>
+                <MdFavorite size={40} className='text-green-500 ' />
+                <span className='absolute flex flex-col items-center justify-center w-6 h-6 ml-2 text-sm bg-white border border-green-400 rounded-full right-10 top-3 border-1'>
+                    {countIsFavorite}
+                </span>
+            </div>
 
             {books.length === 0 ? (
                 <p className='p-4 text-2xl italic text-red-500'>
@@ -32,9 +43,27 @@ function BookList() {
                             }`}
                         >
                             <div className='flex items-center justify-between'>
-                                <span>
+                                <span className='w-full'>
                                     {++i}. {book.title} by{' '}
                                     <strong>{book.author}</strong>
+                                </span>
+
+                                <span
+                                    onClick={() => {
+                                        toggleFavoriteHandler(book.id)
+                                    }}
+                                >
+                                    {book.isFavorite ? (
+                                        <MdFavorite
+                                            size={36}
+                                            className='text-green-500 cursor-pointer hover:text-green-700'
+                                        />
+                                    ) : (
+                                        <MdFavoriteBorder
+                                            size={36}
+                                            className='text-green-500 cursor-pointer hover:text-green-700'
+                                        />
+                                    )}
                                 </span>
                                 <span>
                                     <MdDeleteForever
@@ -42,7 +71,7 @@ function BookList() {
                                         onClick={() =>
                                             deleteBookHandler(book.id)
                                         }
-                                        className='cursor-pointer hover:text-red-500'
+                                        className='ml-4 cursor-pointer hover:text-red-500'
                                     />
                                 </span>
                             </div>
