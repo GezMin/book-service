@@ -1,8 +1,8 @@
 import {
     setTitleFilter,
     setAuthorFilter,
-    selectTitleFilter,
     resetFilter,
+    selectTitleFilter,
     selectAuthorFilter,
 } from '@/app/redux/slices/filterSlice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 function Filter() {
     const dispatch = useDispatch()
     const titleFilter = useSelector(selectTitleFilter)
-    const titleAuthor = useSelector(selectAuthorFilter)
+    const authorFilter = useSelector(selectAuthorFilter)
 
     const handleTitleFilterChange = e => {
         dispatch(setTitleFilter(e.target.value))
@@ -35,7 +35,7 @@ function Filter() {
                     onChange={handleTitleFilterChange}
                 />
                 <input
-                    value={titleAuthor}
+                    value={authorFilter}
                     type='text'
                     placeholder='filter by author...'
                     className='w-full p-2 px-5 mb-4 text-2xl hover:border-cyan-400'

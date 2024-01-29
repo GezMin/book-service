@@ -27,14 +27,10 @@ function BookList() {
         const matchesTitle = book.title
             .toLowerCase()
             .includes(titleFilter.toLowerCase())
-        return matchesTitle
-    })
-
-    const filterAutors = books.filter(book => {
         const matchesAuthor = book.author
             .toLowerCase()
             .includes(authorFilter.toLowerCase())
-        return matchesAuthor
+        return matchesTitle && matchesAuthor
     })
 
     return (
@@ -55,7 +51,7 @@ function BookList() {
                 </p>
             ) : (
                 <ul className='items-center justify-center w-full py-4 mb-2 list-none d-flex'>
-                    {filterAutors.map((book, i) => (
+                    {filteredBooks.map((book, i) => (
                         <li
                             key={book.id}
                             className={`border-b border-violet-400 px-8 text-left text-2xl  p-2 hover:bg-violet-200 ${
