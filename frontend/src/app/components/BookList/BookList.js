@@ -2,9 +2,15 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { deleteBook, toggleFavorite } from '@/app/redux/books/actionCreators'
 import { MdDeleteForever, MdFavorite, MdFavoriteBorder } from 'react-icons/md'
+import {
+    selectTitleFilter,
+    selectAuthorFilter,
+} from '@/app/redux/slices/filterSlice'
 
 function BookList() {
     const books = useSelector(state => state.books)
+    const titleFilter = useSelector(selectTitleFilter)
+    const authorFilter = useSelector(selectAuthorFilter)
     const dispatch = useDispatch()
     const countBooksList = books.length
     const countIsFavorite = books.filter(book => book.isFavorite).length
@@ -16,6 +22,20 @@ function BookList() {
     const toggleFavoriteHandler = id => {
         dispatch(toggleFavorite(id))
     }
+
+    const filteredBooks = books.filter(book => {
+        const matchesTitle = book.title
+            .toLowerCase()
+            .includes(titleFilter.toLowerCase())
+        return matchesTitle
+    })
+
+    const filterAutors = books.filter(book => {
+        const matchesAuthor = book.author
+            .toLowerCase()
+            .includes(authorFilter.toLowerCase())
+        return matchesAuthor
+    })
 
     return (
         <div className='flex flex-col items-center justify-center w-full h-full text-black rounded-md bg-stone-200'>
@@ -35,7 +55,7 @@ function BookList() {
                 </p>
             ) : (
                 <ul className='items-center justify-center w-full py-4 mb-2 list-none d-flex'>
-                    {books.map((book, i) => (
+                    {filterAutors.map((book, i) => (
                         <li
                             key={book.id}
                             className={`border-b border-violet-400 px-8 text-left text-2xl  p-2 hover:bg-violet-200 ${
