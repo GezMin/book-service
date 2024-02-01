@@ -5,12 +5,14 @@ import { MdDeleteForever, MdFavorite, MdFavoriteBorder } from 'react-icons/md'
 import {
     selectTitleFilter,
     selectAuthorFilter,
+    selectOnlyFavoriteFilter,
 } from '@/app/redux/slices/filterSlice'
 
 function BookList() {
     const books = useSelector(state => state.books)
     const titleFilter = useSelector(selectTitleFilter)
     const authorFilter = useSelector(selectAuthorFilter)
+    const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter)
     const dispatch = useDispatch()
     const countBooksList = books.length
     const countIsFavorite = books.filter(book => book.isFavorite).length
@@ -30,7 +32,8 @@ function BookList() {
         const matchesAuthor = book.author
             .toLowerCase()
             .includes(authorFilter.toLowerCase())
-        return matchesTitle && matchesAuthor
+        const matchesFavorite = onlyFavoriteFilter ? book.isFavorite : true
+        return matchesTitle && matchesAuthor && matchesFavorite
     })
 
     return (

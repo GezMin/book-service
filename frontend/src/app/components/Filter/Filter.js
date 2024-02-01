@@ -2,8 +2,10 @@ import {
     setTitleFilter,
     setAuthorFilter,
     resetFilter,
+    setOnlyFavoriteFilter,
     selectTitleFilter,
     selectAuthorFilter,
+    selectOnlyFavoriteFilter,
 } from '@/app/redux/slices/filterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -11,6 +13,7 @@ function Filter() {
     const dispatch = useDispatch()
     const titleFilter = useSelector(selectTitleFilter)
     const authorFilter = useSelector(selectAuthorFilter)
+    const onlyFavoriteFilter = useSelector(selectOnlyFavoriteFilter)
 
     const handleTitleFilterChange = e => {
         dispatch(setTitleFilter(e.target.value))
@@ -23,24 +26,38 @@ function Filter() {
         dispatch(resetFilter())
     }
 
+    const handleOnlyFavoriteFilterChange = () => {
+        dispatch(setOnlyFavoriteFilter())
+    }
+
     return (
         <div className='block'>
             <h2 className='p-4 mt-4 text-3xl font-bold'>Filter</h2>
-            <div className='flex justify-between gap-2'>
+            <div className='flex items-center justify-between gap-2'>
                 <input
                     value={titleFilter}
                     type='text'
                     placeholder='filter by title...'
-                    className='w-full p-2 px-5 mb-4 text-2xl hover:border-cyan-400'
+                    className='p-2 px-5 mb-4 text-2xl hover:border-cyan-400'
                     onChange={handleTitleFilterChange}
                 />
                 <input
                     value={authorFilter}
                     type='text'
                     placeholder='filter by author...'
-                    className='w-full p-2 px-5 mb-4 text-2xl hover:border-cyan-400'
+                    className='p-2 px-5 mb-4 text-2xl hover:border-cyan-400'
                     onChange={handleAuthorFilterChange}
                 />
+                <div className=''>
+                    <label>
+                        <input
+                            type='checkbox'
+                            checked={onlyFavoriteFilter}
+                            onChange={handleOnlyFavoriteFilterChange}
+                        />
+                        Only favorite
+                    </label>
+                </div>
                 <button
                     className='p-2 mb-4 text-2xl text-white bg-violet-600 hover:bg-violet-800'
                     onClick={handleResetFilter}
