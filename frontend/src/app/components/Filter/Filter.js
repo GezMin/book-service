@@ -33,28 +33,28 @@ function Filter() {
     return (
         <div className='block'>
             <h2 className='p-4 mt-4 text-3xl font-bold'>Filter</h2>
-            <div className='flex items-center justify-between gap-2'>
+            <div className='flex items-center justify-between gap-2 px-3'>
                 <input
                     value={titleFilter}
                     type='text'
                     placeholder='filter by title...'
-                    className='p-2 px-5 mb-4 text-2xl hover:border-cyan-500'
+                    className='p-2 px-3 mb-4 text-2xl hover:border-cyan-500'
                     onChange={handleTitleFilterChange}
                 />
                 <input
                     value={authorFilter}
                     type='text'
                     placeholder='filter by author...'
-                    className='p-2 px-5 mb-4 text-2xl hover:border-cyan-400'
+                    className='p-2 px-3 mb-4 text-2xl hover:border-cyan-400'
                     onChange={handleAuthorFilterChange}
                 />
-                <div className=''>
+                <div className='w-[130px]'>
                     <label>
                         <input
                             type='checkbox'
                             checked={onlyFavoriteFilter}
                             onChange={handleOnlyFavoriteFilterChange}
-                        />
+                        />{' '}
                         Only favorite
                     </label>
                 </div>

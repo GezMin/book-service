@@ -36,6 +36,20 @@ function BookList() {
         return matchesTitle && matchesAuthor && matchesFavorite
     })
 
+    const highLightMatch = (text, filter) => {
+        if (!filter) return text
+        const regex = new RegExp(`(${filter})`, 'gi')
+        return text.split(regex).map((part, i) =>
+            regex.test(part) ? (
+                <span className='bg-green-300' key={i}>
+                    {part}
+                </span>
+            ) : (
+                part
+            ),
+        )
+    }
+
     return (
         <div className='flex flex-col items-center justify-center w-full h-full text-black rounded-md bg-stone-200'>
             <div className='relative flex flex-row justify-between w-full p-4 mt-4 text-2xl'>
@@ -63,8 +77,14 @@ function BookList() {
                         >
                             <div className='flex items-center justify-between'>
                                 <span className='w-full'>
-                                    {++i}. {book.title} by{' '}
-                                    <strong>{book.author}</strong>
+                                    {++i}.{' '}
+                                    {highLightMatch(book.title, titleFilter)} by{' '}
+                                    <strong>
+                                        {highLightMatch(
+                                            book.author,
+                                            authorFilter,
+                                        )}
+                                    </strong>
                                 </span>
 
                                 <span
