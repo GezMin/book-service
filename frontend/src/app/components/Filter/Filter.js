@@ -38,7 +38,7 @@ function Filter() {
                     value={titleFilter}
                     type='text'
                     placeholder='filter by title...'
-                    className='p-2 px-5 mb-4 text-2xl hover:border-cyan-400'
+                    className='p-2 px-5 mb-4 text-2xl hover:border-cyan-500'
                     onChange={handleTitleFilterChange}
                 />
                 <input
