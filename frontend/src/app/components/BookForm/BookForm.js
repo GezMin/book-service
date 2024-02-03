@@ -1,8 +1,12 @@
 'use client'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { addBook, fatchBook } from '@/app/redux/slices/bookSlice'
+import {
+    addBook,
+    fatchBook,
+    selectIsLoadingViaAPI,
+} from '@/app/redux/slices/bookSlice'
 import bookData from '@/app/data/books.json'
 import createBookWithId from '@/app/utils/createBookWithId'
 import { setError } from '@/app/redux/slices/errorSlice'
@@ -10,8 +14,8 @@ import { setError } from '@/app/redux/slices/errorSlice'
 function BookForm() {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
+    const isLoadingViaAPI = useSelector(selectIsLoadingViaAPI)
 
     const handleAddRandomBook = () => {
         const randomIndex = [Math.floor(Math.random() * bookData.length)]
@@ -28,16 +32,8 @@ function BookForm() {
         setTitle('')
     }
 
-    const handleAddRandomViaAPI = async () => {
-        try {
-            setIsLoading(true)
-
-            await dispatch(
-                fatchBook('http://localhost:4000/random-book-delayed'),
-            )
-        } finally {
-            setIsLoading(false)
-        }
+    const handleAddRandomViaAPI = () => {
+        dispatch(fatchBook('http://localhost:4000/random-book-delayed'))
     }
 
     return (
@@ -94,9 +90,9 @@ function BookForm() {
                     type='button'
                     onClick={handleAddRandomViaAPI}
                     className='w-full p-2 px-5 mb-3 text-2xl text-white border bg-violet-400 hover:bg-violet-700'
-                    disabled={isLoading}
+                    disabled={isLoadingViaAPI}
                 >
-                    {isLoading ? (
+                    {isLoadingViaAPI ? (
                         <>
                             <span>Loading book ... </span>
                             <span role='status'>
