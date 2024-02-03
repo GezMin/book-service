@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addBook } from '@/app/redux/books/actionCreators'
+import { addBook } from '@/app/redux/slices/bookSlice'
 import bookData from '@/app/data/books.json'
 import createBookWithId from '@/app/utils/createBookWithId'
 
@@ -27,7 +27,7 @@ function BookForm() {
     return (
         <div className='block'>
             <h2 className='p-4 mt-4 text-3xl font-bold'>Add a New Book</h2>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-2 px-5'>
                 <div>
                     <label
                         htmlFor='title'
@@ -37,7 +37,7 @@ function BookForm() {
                     </label>
                     <input
                         id='title'
-                        className='w-full p-2 px-5 text-2xl hover:border-cyan-400'
+                        className='p-2 text-2xl hover:border-cyan-400'
                         type='text'
                         value={title}
                         placeholder='Title'
