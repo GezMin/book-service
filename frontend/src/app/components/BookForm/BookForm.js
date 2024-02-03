@@ -28,7 +28,7 @@ function BookForm() {
     }
 
     const handleAddRandomViaAPI = () => {
-        dispatch(fatchBook())
+        dispatch(fatchBook('http://localhost:4000/random-book'))
     }
 
     return (
