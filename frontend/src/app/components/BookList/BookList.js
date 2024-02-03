@@ -81,14 +81,19 @@ function BookList() {
                         >
                             <div className='flex items-center justify-between'>
                                 <span className='w-full'>
-                                    {++i}.{' '}
-                                    {highLightMatch(book.title, titleFilter)} by{' '}
+                                    {++i}.
+                                    {highLightMatch(book.title, titleFilter)} by
                                     <strong>
                                         {highLightMatch(
                                             book.author,
                                             authorFilter,
                                         )}
-                                    </strong>
+                                    </strong>{' '}
+                                    (
+                                    <span className='px-2 italic text-green-600 text-bold'>
+                                        {book.source}
+                                    </span>
+                                    )
                                 </span>
 
                                 <span
