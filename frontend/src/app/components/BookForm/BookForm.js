@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { addBook, thunkFunction } from '@/app/redux/slices/bookSlice'
+import { addBook, fatchBook } from '@/app/redux/slices/bookSlice'
 import bookData from '@/app/data/books.json'
 import createBookWithId from '@/app/utils/createBookWithId'
 
@@ -26,7 +26,7 @@ function BookForm() {
     }
 
     const handleAddRandomViaAPI = () => {
-        dispatch(thunkFunction)
+        dispatch(fatchBook())
     }
 
     return (
