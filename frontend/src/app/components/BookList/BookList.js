@@ -45,7 +45,7 @@ function BookList() {
         const regex = new RegExp(`(${filter})`, 'gi')
         return text.split(regex).map((part, i) =>
             regex.test(part) ? (
-                <span className='bg-green-300' key={i}>
+                <span className='bg-green-400' key={i}>
                     {part}
                 </span>
             ) : (
